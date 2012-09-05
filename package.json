@@ -1,0 +1,32 @@
+{
+  "name": "spatial_routes",
+  "version": "0.0.1",
+  "description": "Express routes, using shapes_postgis library and details of tables I need ",
+  "main": "index.js",
+    "directories": {
+        "lib":"lib",
+        "test": "test"
+    },
+  "dependencies": {
+    "shapes_postgis": "~0.0.1",
+  },
+    "devDependencies": {
+        "express": "~3.0.0rc4",
+        "mocha": "1.3.x",
+        "should":"*",
+        "request": "*",
+        "async": "*",
+        "underscore":"*"
+  }
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "keywords": [
+    "Express",
+    "PostGIS",
+    "GeoJSON"
+  ],
+  "author": "James E. Marca",
+  "license": "MIT"
+}
