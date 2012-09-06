@@ -81,15 +81,16 @@ describe ('carb shape service', function(){
                            var c = JSON.parse(b)
                            c.should.have.property('type','FeatureCollection')
                            c.should.have.property('features')
-                           c.features.should.have.length(1)
-                           var member = c.features[0]
-                           member.should.have.property('geometry')
-                           member.should.have.property('properties')
-                           member.properties.should.have.property('id')
-
-                           member.properties.should.have.property('name','Orange')
-                           member.properties.should.have.property('coname' ,'ORANGE')
-                           member.properties.should.have.property('fips','06059')
+                           c.features.should.have.length(95)
+                           _.each(c.features
+                                 ,function(member){
+                                      member.should.have.property('geometry')
+                                      member.should.have.property('properties')
+                                      member.properties.should.have.property('id')
+                                      member.properties.should.have.property('name')
+                                      member.properties.should.have.property('coname')
+                                      member.properties.should.have.property('fips')
+                                  })
 
                            return done()
                        })
@@ -132,14 +133,15 @@ describe ('carb shape service', function(){
                            var c = JSON.parse(b)
                            c.should.have.property('type','FeatureCollection')
                            c.should.have.property('features')
-                           c.features.should.have.length(1)
-                           var member = c.features[0]
-                           member.should.have.property('geometry')
-                           member.should.have.property('properties')
-                           member.properties.should.have.property('id')
-
-                           member.properties.should.have.property('name','SOUTH COAST')
-                           member.properties.should.have.property('ab' ,'SC')
+                           c.features.should.have.length(34)
+                           _.each(c.features
+                                 ,function(member){
+                                      member.should.have.property('geometry')
+                                      member.should.have.property('properties')
+                                      member.properties.should.have.property('id')
+                                      member.properties.should.have.property('name')
+                                      member.properties.should.have.property('ab')
+                                  })
 
                            return done()
                        })
@@ -183,15 +185,16 @@ describe ('carb shape service', function(){
                            var c = JSON.parse(b)
                            c.should.have.property('type','FeatureCollection')
                            c.should.have.property('features')
-                           c.features.should.have.length(1)
-                           var member  =c.features[0]
-                           member.should.have.property('geometry')
-                           member.should.have.property('properties')
-                           member.properties.should.have.property('id')
-
-                           member.properties.should.have.property('name','South Coast')
-                           member.properties.should.have.property('dis' ,'SC')
-                           member.properties.should.have.property('disn','SOUTH COAST AQMD')
+                           c.features.should.have.length(47)
+                           _.each(c.features
+                                 ,function(member){
+                                      member.should.have.property('geometry')
+                                      member.should.have.property('properties')
+                                      member.properties.should.have.property('id')
+                                      member.properties.should.have.property('name')
+                                      member.properties.should.have.property('dis')
+                                      member.properties.should.have.property('disn')
+                                  })
 
                            return done()
                        })

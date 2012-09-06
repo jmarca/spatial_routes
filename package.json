@@ -7,8 +7,8 @@
         "lib":"lib",
         "test": "test"
     },
-  "dependencies": {
-    "shapes_postgis": "~0.0.1",
+    "dependencies": {
+    "shapes_postgis": "~0.0.1"
   },
     "devDependencies": {
         "express": "~3.0.0rc4",
@@ -17,7 +17,7 @@
         "request": "*",
         "async": "*",
         "underscore":"*"
-  }
+    },
   "scripts": {
     "test": "mocha"
   },
