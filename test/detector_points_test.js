@@ -5,8 +5,7 @@
 var should = require('should')
 
 var request = require('request');
-var async = require('async')
-var _ = require('underscore');
+var _ = require('lodash');
 var detectors  = require('../lib/detectors').detectors
 
 var http = require('http')

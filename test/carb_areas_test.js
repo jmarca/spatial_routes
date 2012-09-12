@@ -5,8 +5,7 @@
 var should = require('should')
 
 var request = require('request');
-var async = require('async')
-var _ = require('underscore');
+var _ = require('lodash');
 var carb_areas = require('../lib/carb_areas').carb_areas
 var detectors  = require('../lib/detectors').detectors
 
