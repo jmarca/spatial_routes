@@ -35,7 +35,10 @@ describe ('murb links service', function(){
             murb_topojson({},app)
             server=http
                    .createServer(app)
-                   .listen(testport,done)
+                   .listen(testport,testhost,function(){
+                       console.log('test server on ' +testhost+':'+testport)
+                       done()
+                   })
 
         })
     after(function(done){

@@ -52,7 +52,8 @@ describe ('detectors service', function(){
                        var c = JSON.parse(b)
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
-                       c.features.should.have.length(5334)
+                       c.features.should.have.length(5319)
+                       //console.log(c.features.length)
                        _.each(c.features
                              ,function(member){
                                   member.should.have.property('geometry')
