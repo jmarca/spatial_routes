@@ -36,7 +36,6 @@ describe ('murb links service', function(){
             server=http
                    .createServer(app)
                    .listen(testport,testhost,function(){
-                       console.log('test server on ' +testhost+':'+testport)
                        done()
                    })
 
@@ -59,9 +58,7 @@ describe ('murb links service', function(){
                            c.should.have.property('type','FeatureCollection')
                            c.should.have.property('features')
                        c.features.should.have.property('length')
-                       c.features.length.should.be.above(0)
-                       console.log('features.length is '+c.features.length)
-
+                       c.features.length.should.eql(102)
                        return done()
                    })
        })
@@ -79,8 +76,7 @@ describe ('murb links service', function(){
                        c.should.have.property('type','Topology')
                        c.should.have.property('arcs')
                        c.arcs.should.have.property('length')
-                       c.arcs.length.should.be.above(0)
-                       console.log('arcs.length is '+c.arcs.length)
+                       c.arcs.length.should.eql(152)
 
                        c.should.have.property('objects')
                        var topo_objects = c.objects
