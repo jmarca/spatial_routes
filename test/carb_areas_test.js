@@ -198,5 +198,34 @@ describe ('carb shape service', function(){
                            return done()
                        })
            })
+        it('should spit out all the grid4k shapes'
+          ,function(done){
+               // load the service for vds shape data
+               request({'url':'http://'+ testhost +':'+testport+'/grid4k.json'
+                       ,'headers':{'accept':'application/json'}
+                       ,'followRedirect':true}
+                      ,function(e,r,b){
+                           if(e) return done(e)
+                           r.statusCode.should.equal(200)
+                           should.exist(b)
+                           var c = JSON.parse(b)
+                           c.should.have.property('type','FeatureCollection')
+                           c.should.have.property('features')
+                           c.features.should.have.length(25083)
+                           _.each(c.features
+                                 ,function(member){
+                                      member.should.have.property('geometry')
+                                      member.should.have.property('properties')
+                                      member.properties.should.have.property('id')
+                                      member.properties.should.have.property('cell_id')
+                                      member.properties.should.have.property('i_cell')
+                                      member.properties.should.have.property('j_cell')
+                                      member.properties.should.have.property('fid_state4')
+
+                                  })
+
+                           return done()
+                       })
+           })
     })
 })
