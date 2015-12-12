@@ -52,7 +52,7 @@ describe ('detectors service', function(){
                        var c = JSON.parse(b)
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
-                       c.features.should.have.length(6442)
+                       c.features.should.have.length(5319)
                        //console.log(c.features.length)
                        _.each(c.features
                              ,function(member){
@@ -130,6 +130,39 @@ describe ('detectors service', function(){
                    })
        })
 
+    it('should fetch all the wim points'
+      ,function(done){
+           request({url:'http://'+ testhost +':'+testport+'/wim_detectors.json'
+                   ,'headers':{'accept':'application/json'}
+                   ,followRedirect:true}
+                  ,function(e,r,b){
+                       if(e) return done(e)
+                       r.statusCode.should.equal(200)
+                       should.exist(b)
+                       var c = JSON.parse(b)
+                       c.should.have.property('type','FeatureCollection')
+                       c.should.have.property('features')
+		       var l = c.features.length
+                       l.should.eql(220)
+                       var vds_match=false
+                       var wim_match = false;
+                       var vds_regex = /vdsid_\d{6,7}/;
+                       var wim_regex = /wimid_\d+_[NSEW]/;
+                       _.each(c.features
+                             ,function(member){
+                                  member.should.have.property('geometry')
+                                  member.should.have.property('properties')
+                                  member.properties.should.have.property('id')
+                                  if(vds_regex.test(member.properties.id))
+                                      vds_match = true
+                                  if(wim_regex.test(member.properties.id))
+                                      wim_match = true
+                              });
+                       vds_match.should.be.false
+                       wim_match.should.be.true
+                       return done()
+                   })
+       })
     it('should fetch all the points'
       ,function(done){
            request({url:'http://'+ testhost +':'+testport+'/detectors.json'
@@ -142,7 +175,8 @@ describe ('detectors service', function(){
                        var c = JSON.parse(b)
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
-                       c.features.should.have.length(18149)
+		       var l = c.features.length
+                       l.should.eql(13322)
                        var vds_match=false
                        var wim_match = false;
                        var vds_regex = /vdsid_\d{6,7}/;
@@ -159,6 +193,39 @@ describe ('detectors service', function(){
                               });
                        vds_match.should.be.true
                        wim_match.should.be.true
+                       return done()
+                   })
+       })
+    it('should fetch all the vds points'
+      ,function(done){
+           request({url:'http://'+ testhost +':'+testport+'/vds_detectors.json'
+                   ,'headers':{'accept':'application/json'}
+                   ,followRedirect:true}
+                  ,function(e,r,b){
+                       if(e) return done(e)
+                       r.statusCode.should.equal(200)
+                       should.exist(b)
+                       var c = JSON.parse(b)
+                       c.should.have.property('type','FeatureCollection')
+                       c.should.have.property('features')
+		       var l = c.features.length
+                       l.should.eql(13102)
+                       var vds_match=false
+                       var wim_match = false;
+                       var vds_regex = /vdsid_\d{6,7}/;
+                       var wim_regex = /wimid_\d+_[NSEW]/;
+                       _.each(c.features
+                             ,function(member){
+                                  member.should.have.property('geometry')
+                                  member.should.have.property('properties')
+                                  member.properties.should.have.property('id')
+                                  if(vds_regex.test(member.properties.id))
+                                      vds_match = true
+                                  if(wim_regex.test(member.properties.id))
+                                      wim_match = true
+                              });
+                       vds_match.should.be.true
+                       wim_match.should.be.false
                        return done()
                    })
        })
