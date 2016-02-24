@@ -12,15 +12,26 @@ var detectors  = require('../lib/detectors').detectors
 var http = require('http')
 var express = require('express')
 
-var env = process.env;
-var puser = process.env.PSQL_USER ;
-var ppass = process.env.PSQL_PASS ;
-var phost = process.env.PSQL_HOST ;
-var pport = process.env.PSQL_PORT || 5432;
+// use config file for database parameters
+var config_okay = require('config_okay')
+var path    = require('path')
+var config_file = path.normalize(process.cwd()+'/test.config.json')
+var config={}
 
+var testhost = '127.0.0.1'
+var testport = 3000
 
-var testhost = env.SHAPES_TEST_HOST || '127.0.0.1'
-var testport = env.SHAPES_TEST_PORT || 3000
+before(function(done){
+
+    config_okay(config_file,function(e,c){
+        if(e) throw new Error (e)
+        config = c
+        return done()
+    })
+    return null
+
+})
+
 
 
 describe ('carb shape service', function(){

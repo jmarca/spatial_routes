@@ -1,6 +1,6 @@
 {
   "name": "spatial_routes",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Express routes, using shapes_postgis library and details of tables I need ",
   "main": "index.js",
   "directories": {
@@ -8,17 +8,17 @@
     "test": "test"
   },
   "dependencies": {
-    "shapes_postgis": "git://github.com/jmarca/shapes_postgis.git",
+    "shapes_postgis": "jmarca/shapes_postgis",
     "async": "",
     "topojson": "",
     "lodash": ""
   },
   "devDependencies": {
-    "express": "~3.0.0rc4",
-    "mocha": "1.3.x",
-    "should": "*",
-    "request": "*",
-    "lodash": "*"
+    "express": "",
+    "mocha": "",
+    "should": "",
+    "request": "",
+    "lodash": ""
   },
   "scripts": {
     "test": "mocha --timeout 5000 -R list"
