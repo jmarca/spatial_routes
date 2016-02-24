@@ -8,10 +8,11 @@
     "test": "test"
   },
   "dependencies": {
-    "shapes_postgis": "jmarca/shapes_postgis",
     "async": "",
-    "topojson": "",
-    "lodash": ""
+    "config_okay": "0.0.3",
+    "lodash": "",
+    "shapes_postgis": "jmarca/shapes_postgis",
+    "topojson": ""
   },
   "devDependencies": {
     "express": "",
