@@ -47,7 +47,7 @@ describe ('detectors service', function(){
             server=http
                 .createServer(app)
                 .listen(testport,done)
-
+            return null
         })
     after(function(done){
         server.close(done)
