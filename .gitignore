@@ -3,3 +3,6 @@
 .tern-port
 config.json
 test.config.json
+coverage
+dist
+docs

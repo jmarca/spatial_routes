@@ -33,7 +33,13 @@
     "should": ""
   },
   "scripts": {
-    "test": "mocha --timeout 5000 -R list"
+    "coveralls": "gulp test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "lint": "gulp lint",
+    "postversion": "git push && git push --tags",
+    "prepublish": "gulp default",
+    "preversion": "echo \"Another version! Keep up the good work!\"",
+    "test": "gulp test",
+    "version": ""
   },
   "repository": {
     "type": "git",
@@ -43,6 +49,10 @@
     "Express",
     "PostGIS",
     "GeoJSON"
+  ],
+  "pre-commit": [
+    "lint",
+    "test"
   ],
   "author": "James E. Marca",
   "license": "MIT"

@@ -9,7 +9,7 @@ let gulp = require('gulp'),
     mocha = require('gulp-mocha');
 
 const srcCode = ['./lib/**/*.js'];
-const specs = ['./test/**/*_spec.js'];
+const tests = ['./test/**/test_*.js'];
 const lintedFiles = ['*.js', './test/**/*.js', '!./test/docs/**/*.js'].concat(srcCode);
 
 // No real need to have a minify set for now, let dev and prod builds be the same
@@ -63,8 +63,10 @@ gulp.task('test', ['pre-test'], function () {
     // Everything file loaded from here uses babel with .babelrc
     require('babel-core/register'); // https://babeljs.io/docs/usage/require/
 
-    return gulp.src(specs, {read: false})
-        .pipe(mocha())
+    return gulp.src(tests, {read: false})
+        .pipe(mocha({
+            reporter: 'spec', timeout: 50000}
+                   ))
         .pipe(istanbul.writeReports())
         // Enforce a coverage of at least 90%
         .pipe(istanbul.enforceThresholds({thresholds: {global: 75}}));
