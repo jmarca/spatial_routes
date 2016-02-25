@@ -1,21 +1,22 @@
-{ "vds":{"db":"osm"
-         ,"table":"newtbmap.tvd"
-         ,"alias":"tvd"
-         ,"select_properties":{"tvd.freeway_id" : "freeway"
-                               ,"tvd.freeway_dir": "direction"
-                               ,""vdsid_" || id"   : "detector_id"
-                               ,"vdstype"        : "type"
-                              }
-         ,"id_col":"detector_id"
-        },
-  "wim":{"db":"osm"
-         ,"table":"osm_upgraded_2010.twim"
-         ,"alias":"twim"
-         ,"select_properties":{"twim.freeway_id" : "freeway"
-                               ,"twim.direction": "direction"
-                               ,"\"wimid_\" || site_no"   : "detector_id"
-                               ,"wim_type"        : "type"
-                              }
-         ,"id_col":["detector_id","direction"]
-        }
+{
+    "vds":{"db":"osm"
+           ,"table":"newtbmap.tvd"
+           ,"alias":"tvd"
+           ,"select_properties":{"tvd.freeway_id" : "freeway"
+                                 ,"tvd.freeway_dir": "direction"
+                                 ,"'vdsid_' || id"   : "detector_id"
+                                 ,"vdstype"        : "type"
+                                }
+           ,"id_col":"detector_id"
+          },
+    "wim":{"db":"osm"
+           ,"table":"osm_upgraded_2010.twim"
+           ,"alias":"twim"
+           ,"select_properties":{"twim.freeway_id" : "freeway"
+                                 ,"twim.direction": "direction"
+                                 ,"'wimid_' || site_no"   : "detector_id"
+                                 ,"wim_type"        : "type"
+                                }
+           ,"id_col":["detector_id","direction"]
+          }
 }

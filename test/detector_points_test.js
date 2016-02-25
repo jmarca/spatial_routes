@@ -36,8 +36,8 @@ before(function(done){
 describe ('detectors service', function(){
 
     var app,server
-    var vds_regex = new RegExp('vdsid_\d{6,7}')
-    var wim_regex = new RegExp('wimid_\d+_[NSEW]')
+    var vds_regex = new RegExp('vdsid_\\d{6,7}')
+    var wim_regex = new RegExp('wimid_\\d+_[NSEW]')
 
     before(
         function(done){
@@ -67,7 +67,7 @@ describe ('detectors service', function(){
                        c = JSON.parse(b)
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
-                       c.features.should.have.length(5319)
+                       c.features.length.should.eql(6442)
                        //console.log(c.features.length)
                        _.each(c.features
                               ,function(member){
@@ -98,7 +98,7 @@ describe ('detectors service', function(){
                        c = JSON.parse(b)
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
-                       c.features.should.have.length(38)
+                       c.features.length.should.eql(38)
                        _.each(c.features
                               ,function(member){
                                   member.should.have.property('geometry')
@@ -108,7 +108,7 @@ describe ('detectors service', function(){
                                   member.properties.should.have.property('direction')
                                   member.properties.should.have.property('type')
                                   member.properties.should.have.property('detector_id')
-                                  member.properties.detector_id.should.match(/^wimid_/)
+                                  member.properties.id.should.match(wim_regex)
                               })
                        return done()
                    })
@@ -120,8 +120,6 @@ describe ('detectors service', function(){
                     ,followRedirect:true}
                    ,function(e,r,b){
                        var c
-                       var vds_match=false
-                       var wim_match = false
 
                        if(e) return done(e)
                        r.statusCode.should.equal(200)
@@ -135,13 +133,10 @@ describe ('detectors service', function(){
                                       member.should.have.property('geometry')
                                       member.should.have.property('properties')
                                       member.properties.should.have.property('id')
-                                      if(vds_regex.test(member.properties.id))
-                                          vds_match = true
-                                      if(wim_regex.test(member.properties.id))
-                                          wim_match = true
+                                      member.properties.id.should.match(function(id){
+                                          return wim_regex.test(id) || vds_regex.test(id)
+                                      })
                                   })
-                       vds_match.should.be.true
-                       wim_match.should.be.true
                        return done()
                    })
        })
@@ -152,29 +147,22 @@ describe ('detectors service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,followRedirect:true}
                    ,function(e,r,b){
-                       var l,c
-                       var vds_match=false
-                       var wim_match = false
+                       var c
                        if(e) return done(e)
                        r.statusCode.should.equal(200)
                        should.exist(b)
                        c = JSON.parse(b)
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
-                       l = c.features.length
-                       l.should.eql(220)
+                       c.features.length.should.eql(220)
                            _.each(c.features
                                   ,function(member){
                                       member.should.have.property('geometry')
                                       member.should.have.property('properties')
                                       member.properties.should.have.property('id')
-                                      if(vds_regex.test(member.properties.id))
-                                          vds_match = true
-                                      if(wim_regex.test(member.properties.id))
-                                          wim_match = true
+                                      member.properties.id.should.match(wim_regex)
+                                      member.properties.id.should.not.match(vds_regex)
                                   })
-                       vds_match.should.be.false
-                       wim_match.should.be.true
                        return done()
                    })
        })
@@ -184,30 +172,23 @@ describe ('detectors service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,followRedirect:true}
                    ,function(e,r,b){
-                       var c,l
-                       var vds_match=false
-                       var wim_match = false
-
+                       var c
                        if(e) return done(e)
                        r.statusCode.should.equal(200)
                        should.exist(b)
                        c = JSON.parse(b)
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
-                       l = c.features.length
-                       l.should.eql(13322)
+                       c.features.length.should.eql(18149)
                            _.each(c.features
                                   ,function(member){
                                       member.should.have.property('geometry')
                                       member.should.have.property('properties')
                                       member.properties.should.have.property('id')
-                                      if(vds_regex.test(member.properties.id))
-                                          vds_match = true
-                                      if(wim_regex.test(member.properties.id))
-                                          wim_match = true
+                                      member.properties.id.should.match(function(id){
+                                          return wim_regex.test(id) || vds_regex.test(id)
+                                      })
                                   })
-                       vds_match.should.be.true
-                       wim_match.should.be.true
                        return done()
                    })
        })
@@ -217,29 +198,22 @@ describe ('detectors service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,followRedirect:true}
                    ,function(e,r,b){
-                       var c,l
-                       var vds_match=false
-                       var wim_match = false
+                       var c
                        if(e) return done(e)
                        r.statusCode.should.equal(200)
                        should.exist(b)
                        c = JSON.parse(b)
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
-                       l = c.features.length
-                       l.should.eql(13102)
+                       c.features.length.should.eql(17929)
                        _.each(c.features
                               ,function(member){
                                   member.should.have.property('geometry')
                                   member.should.have.property('properties')
                                   member.properties.should.have.property('id')
-                                  if(vds_regex.test(member.properties.id))
-                                      vds_match = true
-                                  if(wim_regex.test(member.properties.id))
-                                      wim_match = true
+                                  member.properties.id.should.match(vds_regex)
+                                  member.properties.id.should.not.match(wim_regex)
                               })
-                       vds_match.should.be.true()
-                       wim_match.should.be.false()
                        return done()
                    })
        })
