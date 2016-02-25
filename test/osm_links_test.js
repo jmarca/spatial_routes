@@ -44,7 +44,7 @@ describe ('osm links service', function(){
             osm_topojson(options,app)
             server=http
                 .createServer(app)
-                .listen(testport,done)
+                .listen(testport,testhost,done)
             return null
         })
     after(function(done){
