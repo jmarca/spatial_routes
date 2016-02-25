@@ -1,0 +1,14 @@
+{
+   "db" : "osm",
+   "alias" : "nrl",
+    "table" : "tempseg.numbered_route_lines",
+   "id_col" : [
+      "freeway",
+      "direction"
+   ],
+   "geo_col" : "routeline",
+   "select_properties" : {
+      "nrl.direction" : "direction",
+      "nrl.refnum" : "freeway"
+   }
+}

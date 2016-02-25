@@ -1,0 +1,69 @@
+{
+    "county_handler":{"db":"spatialvds"
+                      ,"table":"public.carb_counties_aligned_03"
+                      ,"alias":"counties"
+                      ,"select_properties":{"gid"           : "gid"
+                                            ,"a.fips"       : "fips"
+                                            ,"cacoa_"       : "cacoa_"
+                                            ,"cacoa_id"     : "id"
+                                            ,"coname"       : "coname"
+                                            ,"a.name"       : "name"
+                                            ,"conum"        : "conum"
+                                            ,"display"      : "display"
+                                            ,"symbol"       : "symbol"
+                                            ,"islandname"   : "islandname"
+                                            ,"baysplinte"   : "baysplinte"
+                                            ,"cntyi_area"   : "cntyi_area"
+                                            ,"island_id"    : "island_id"
+                                            ,"bay_id"       : "bay_id"
+                                           }
+                      ,"id_col":["fips","gid"]
+                      ,"geo_col":"geom4326"
+                      ,"join_tables":[{"table":"counties_fips"
+                                       ,"alias":"a"
+                                       ,"join" :"on (counties.name ~* a.name)"}
+                                     ]
+                     },
+    "basin_handler":{"db":"spatialvds"
+                     ,"table":"public.carb_airbasins_aligned_03"
+                     ,"alias":"airbasins"
+                     ,"select_properties":{"gid"        : "gid"
+                                           ,"perimeter"  : "perimeter"
+                                           ,"area"       : "area"
+                                           ,"abasa_"     : "abasa_"
+                                           ,"abasa_id"   : "id"
+                                           ,"basin_name" : "name"
+                                           ,"ab"         : "ab"
+                                          }
+                     ,"id_col":["name","gid"]
+                     ,"geo_col":"geom_4326"
+                    },
+    "district_handler":{"db":"spatialvds"
+                        ,"table":"public.carb_airdistricts_aligned_03"
+                        ,"alias":"airdistricts"
+                        ,"select_properties":{"gid"        : "gid"
+                                              ,"disti_area" : "area"
+                                              ,"adisa_"     : "adisa_"
+                                              ,"adisa_id"   : "id"
+                                              ,"name"       : "name"
+                                              ,"dis"        : "dis"
+                                              ,"disn"       : "disn"
+                                              ,"display"    : "display"
+                                              ,"dist_type"  : "dist_type"
+                                             }
+                        ,"id_col":["name","gid"]
+                        ,"geo_col":"geom4326"
+                       },
+    "grid4k_handler":{"db":"spatialvds"
+                      ,"table":"carbgrid.state4k"
+                      ,"alias":"state4k"
+                      ,"select_properties":{"gid"           : "gid"
+                                            ,"cell_id"       : "cell_id"
+                                            ,"i_cell"        : "i_cell"
+                                            ,"j_cell"        : "j_cell"
+                                            ,"fid_state4"    : "fid_state4"
+                                           }
+                      ,"id_col":["i_cell","j_cell"]
+                      ,"geo_col":"geom4326"
+                     }
+}

@@ -1,12 +1,12 @@
 /* global require console process it describe after before */
 
-// test that the murb service works as expected
+// these tests are for a user, but not one with admin privs
 
 var should = require('should')
 
 var request = require('request')
-var murb_links = require('../lib/murb_links').murb_links
-var murb_topojson = require('../lib/murb_links').murb_topojson
+var osm_links = require('../lib/osm_links').osm_links
+var osm_topojson = require('../lib/osm_links').osm_topojson
 
 var http = require('http')
 var express = require('express')
@@ -31,18 +31,18 @@ before(function(done){
 
 })
 
-describe ('ways to not invoke the murb links service', function(){
+describe ('ways to not invoke the osm links service', function(){
 
     it('should complain about bad invocations',function(done){
 
-        murb_links.should.throw()
-        murb_topojson.should.throw()
+        osm_links.should.throw()
+        osm_topojson.should.throw()
         function f2 (){
-            murb_links({})
+            osm_links({})
             return null
         }
         function f3 (){
-            murb_topojson({})
+            osm_topojson({})
             return null
         }
         f2.should.throw()
@@ -50,19 +50,19 @@ describe ('ways to not invoke the murb links service', function(){
         return done()
     })
 })
-describe ('ways to invoke the murb service',function(){
+describe ('ways to invoke the osm service',function(){
     it('should accept alternate json filename',function(done){
         var options = Object.assign({},config.postgresql,config.postgresql.auth)
         var app = express()
         function f(){
-            murb_links(options
-                       ,'json/murb_links.json'
+            osm_links(options
+                       ,'json/osm_links.json'
                        ,app)
             return null
         }
         function f2(){
-            murb_topojson(options
-                       ,'json/murb_links.json'
+            osm_topojson(options
+                       ,'json/osm_links.json'
                        ,app)
             return null
         }
@@ -72,8 +72,7 @@ describe ('ways to invoke the murb service',function(){
     })
 })
 
-
-describe ('murb links service', function(){
+describe ('osm links service', function(){
 
     var app,server
 
@@ -81,8 +80,8 @@ describe ('murb links service', function(){
         function(done){
             var options = Object.assign({},config.postgresql,config.postgresql.auth)
             app = express()
-            murb_links(options,app)
-            murb_topojson(options,app)
+            osm_links(options,app)
+            osm_topojson(options,app)
             server=http
                 .createServer(app)
                 .listen(testport,testhost,done)
@@ -95,7 +94,7 @@ describe ('murb links service', function(){
     it('should spit out geojson'
        ,function(done){
            // load the service for vds shape data
-           request({'url':'http://'+ testhost +':'+testport+'/detectors/murb/2007/11/353/820.json'
+           request({'url':'http://'+ testhost +':'+testport+'/osm_map/11/353/820.json'
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
@@ -107,14 +106,16 @@ describe ('murb links service', function(){
                        c.should.have.property('type','FeatureCollection')
                        c.should.have.property('features')
                        c.features.should.have.property('length')
-                       c.features.length.should.eql(322)
+                       c.features.length.should.be.above(0)
+                       //console.log('features.length is '+c.features.length)
+
                        return done()
                    })
        })
     it('should spit out topojson, not geojson'
        ,function(done){
            // load the service for vds shape data
-           request({'url':'http://'+ testhost +':'+testport+'/detectors/murb_topo/2008/11/353/820.json'
+           request({'url':'http://'+ testhost +':'+testport+'/osm_topo_map/11/353/820.json'
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
@@ -126,7 +127,8 @@ describe ('murb links service', function(){
                        c.should.have.property('type','Topology')
                        c.should.have.property('arcs')
                        c.arcs.should.have.property('length')
-                       c.arcs.length.should.eql(201)
+                       c.arcs.length.should.be.above(0)
+                       //console.log('arcs.length is '+c.arcs.length)
 
                        c.should.have.property('objects')
                        c.objects.forEach(function(obj){

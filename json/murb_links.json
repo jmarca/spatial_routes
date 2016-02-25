@@ -1,0 +1,23 @@
+{
+   "alias" : "murb",
+   "select_properties" : {
+      "murb.direction" : "direction",
+      "murb.year" : "year",
+      "murb.detector_id" : "detector_id",
+      "murb.refnum" : "freeway"
+   },
+   "where_clause" : "murb.detector_id ~* 'vdsid'",
+   "table" : "tempseg.mostusedroadbits",
+   "id_col" : [
+      "freeway",
+      "direction"
+   ],
+   "geo_col" : "seggeom",
+   "dynamic_where_clause" : {
+      "year" : {
+         "comp" : "=",
+         "lhs" : "year"
+      }
+   },
+   "db" : "spatialvds"
+}
