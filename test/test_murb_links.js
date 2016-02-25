@@ -31,6 +31,48 @@ before(function(done){
 
 })
 
+describe ('ways to not invoke the murb links service', function(){
+
+    it('should complain about bad invocations',function(done){
+
+        murb_links.should.throw()
+        murb_topojson.should.throw()
+        function f2 (){
+            murb_links({})
+            return null
+        }
+        function f3 (){
+            murb_topojson({})
+            return null
+        }
+        f2.should.throw()
+        f3.should.throw()
+        return done()
+    })
+})
+describe ('ways to invoke the murb service',function(){
+    it('should accept alternate json filename',function(done){
+        var options = Object.assign({},config.postgresql,config.postgresql.auth)
+        var app = express()
+        function f(){
+            murb_links(options
+                       ,'json/murb_links.json'
+                       ,app)
+            return null
+        }
+        function f2(){
+            murb_topojson(options
+                       ,'json/murb_links.json'
+                       ,app)
+            return null
+        }
+        f.should.not.throw()
+        f2.should.not.throw()
+        return done()
+    })
+})
+
+
 describe ('murb links service', function(){
 
     var app,server

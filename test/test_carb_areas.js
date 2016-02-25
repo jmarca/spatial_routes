@@ -31,6 +31,33 @@ before(function(done){
 
 })
 
+describe ('ways to not invoke the murb links service', function(){
+
+    it('should complain about bad invocations',function(done){
+
+        carb_areas.should.throw()
+        function f2 (){
+            carb_areas({})
+            return null
+        }
+        f2.should.throw()
+        return done()
+    })
+})
+describe ('ways to invoke the murb service',function(){
+    it('should accept alternate json filename',function(done){
+        var options = Object.assign({},config.postgresql,config.postgresql.auth)
+        var app = express()
+        function f(){
+            carb_areas(options
+                       ,'json/carb_areas.json'
+                       ,app)
+            return null
+        }
+        f.should.not.throw()
+        return done()
+    })
+})
 
 
 describe ('carb shape service', function(){

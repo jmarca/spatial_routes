@@ -32,6 +32,35 @@ before(function(done){
 })
 
 
+describe ('ways to not invoke the murb links service', function(){
+
+    it('should complain about bad invocations',function(done){
+
+        detectors.should.throw()
+        function f2 (){
+            detectors({})
+            return null
+        }
+        f2.should.throw()
+        return done()
+    })
+})
+describe ('ways to invoke the murb service',function(){
+    it('should accept alternate json filename',function(done){
+        var options = Object.assign({},config.postgresql,config.postgresql.auth)
+        var app = express()
+        function f(){
+            detectors(options
+                       ,'json/detectors.json'
+                       ,app)
+            return null
+        }
+        f.should.not.throw()
+        return done()
+    })
+})
+
+
 
 describe ('detectors service', function(){
 

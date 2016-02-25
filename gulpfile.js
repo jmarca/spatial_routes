@@ -50,18 +50,19 @@ gulp.task('doc', function (cb) {
 
 gulp.task('pre-test', function () {
     // Everything file loaded from here uses babel with .babelrc
-    require('babel-core/register'); // https://babeljs.io/docs/usage/require/
+    //require('babel-core/register'); // https://babeljs.io/docs/usage/require/
 
     return gulp.src(srcCode)
         // Covering files (we use isparta for babel support)
-        .pipe(istanbul({instrumenter: require('isparta').Instrumenter}))
+    //.pipe(istanbul({instrumenter: require('isparta').Instrumenter}))
+        .pipe(istanbul())
         // Force `require` to return covered files
         .pipe(istanbul.hookRequire());
 });
 
 gulp.task('test', ['pre-test'], function () {
     // Everything file loaded from here uses babel with .babelrc
-    require('babel-core/register'); // https://babeljs.io/docs/usage/require/
+    //require('babel-core/register'); // https://babeljs.io/docs/usage/require/
 
     return gulp.src(tests, {read: false})
         .pipe(mocha({

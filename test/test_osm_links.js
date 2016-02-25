@@ -31,6 +31,46 @@ before(function(done){
 
 })
 
+describe ('ways to not invoke the osm links service', function(){
+
+    it('should complain about bad invocations',function(done){
+
+        osm_links.should.throw()
+        osm_topojson.should.throw()
+        function f2 (){
+            osm_links({})
+            return null
+        }
+        function f3 (){
+            osm_topojson({})
+            return null
+        }
+        f2.should.throw()
+        f3.should.throw()
+        return done()
+    })
+})
+describe ('ways to invoke the osm service',function(){
+    it('should accept alternate json filename',function(done){
+        var options = Object.assign({},config.postgresql,config.postgresql.auth)
+        var app = express()
+        function f(){
+            osm_links(options
+                       ,'json/osm_links.json'
+                       ,app)
+            return null
+        }
+        function f2(){
+            osm_topojson(options
+                       ,'json/osm_links.json'
+                       ,app)
+            return null
+        }
+        f.should.not.throw()
+        f2.should.not.throw()
+        return done()
+    })
+})
 
 describe ('osm links service', function(){
 
