@@ -4,8 +4,8 @@
 
 var should = require('should')
 
-var request = require('request');
-var _ = require('lodash');
+var request = require('request')
+var _ = require('lodash')
 var carb_areas = require('../lib/carb_areas').carb_areas
 var detectors  = require('../lib/detectors').detectors
 
@@ -36,7 +36,7 @@ before(function(done){
 
 describe ('carb shape service', function(){
 
-    var app,server;
+    var app,server
 
     before(
         function(done){
@@ -59,24 +59,24 @@ describe ('carb shape service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
-                       if(e) return done(e)
-                       r.statusCode.should.equal(200)
-                       should.exist(b)
-                       var c = JSON.parse(b)
-                       c.should.have.property('type','FeatureCollection')
-                       c.should.have.property('features')
-                       c.features.should.have.length(1)
-                       var member = c.features[0]
-                       member.should.have.property('geometry')
-                       member.should.have.property('properties')
-                       member.properties.should.have.property('id')
+               if(e) return done(e)
+               r.statusCode.should.equal(200)
+               should.exist(b)
+               var c = JSON.parse(b)
+               c.should.have.property('type','FeatureCollection')
+               c.should.have.property('features')
+               c.features.should.have.length(1)
+               var member = c.features[0]
+               member.should.have.property('geometry')
+               member.should.have.property('properties')
+               member.properties.should.have.property('id')
 
-                       member.properties.should.have.property('name','Orange')
-                       member.properties.should.have.property('coname' ,'ORANGE')
-                       member.properties.should.have.property('fips','06059')
+               member.properties.should.have.property('name','Orange')
+               member.properties.should.have.property('coname' ,'ORANGE')
+               member.properties.should.have.property('fips','06059')
 
-                       return done()
-                   })
+               return done()
+           })
        })
     it('should spit out all the county shapes'
        ,function(done){
@@ -85,14 +85,14 @@ describe ('carb shape service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
-                       if(e) return done(e)
-                       r.statusCode.should.equal(200)
-                       should.exist(b)
-                       var c = JSON.parse(b)
-                       c.should.have.property('type','FeatureCollection')
-                       c.should.have.property('features')
-                       c.features.should.have.length(95)
-                       _.each(c.features
+               if(e) return done(e)
+               r.statusCode.should.equal(200)
+               should.exist(b)
+               var c = JSON.parse(b)
+               c.should.have.property('type','FeatureCollection')
+               c.should.have.property('features')
+               c.features.should.have.length(95)
+               _.each(c.features
                               ,function(member){
                                   member.should.have.property('geometry')
                                   member.should.have.property('properties')
@@ -102,8 +102,8 @@ describe ('carb shape service', function(){
                                   member.properties.should.have.property('fips')
                               })
 
-                       return done()
-                   })
+               return done()
+           })
        })
     it('should spit out airbasin shapes in a bbox'
        ,function(done){
@@ -112,23 +112,23 @@ describe ('carb shape service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
-                       if(e) return done(e)
-                       r.statusCode.should.equal(200)
-                       should.exist(b)
-                       var c = JSON.parse(b)
-                       c.should.have.property('type','FeatureCollection')
-                       c.should.have.property('features')
-                       c.features.should.have.length(1)
-                       var member = c.features[0]
-                       member.should.have.property('geometry')
-                       member.should.have.property('properties')
-                       member.properties.should.have.property('id')
+               if(e) return done(e)
+               r.statusCode.should.equal(200)
+               should.exist(b)
+               var c = JSON.parse(b)
+               c.should.have.property('type','FeatureCollection')
+               c.should.have.property('features')
+               c.features.should.have.length(1)
+               var member = c.features[0]
+               member.should.have.property('geometry')
+               member.should.have.property('properties')
+               member.properties.should.have.property('id')
 
-                       member.properties.should.have.property('name','SOUTH COAST')
-                       member.properties.should.have.property('ab' ,'SC')
+               member.properties.should.have.property('name','SOUTH COAST')
+               member.properties.should.have.property('ab' ,'SC')
 
-                       return done()
-                   })
+               return done()
+           })
        })
     it('should spit out all the airbasin shapes'
        ,function(done){
@@ -137,14 +137,14 @@ describe ('carb shape service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
-                       if(e) return done(e)
-                       r.statusCode.should.equal(200)
-                       should.exist(b)
-                       var c = JSON.parse(b)
-                       c.should.have.property('type','FeatureCollection')
-                       c.should.have.property('features')
-                       c.features.should.have.length(34)
-                       _.each(c.features
+               if(e) return done(e)
+               r.statusCode.should.equal(200)
+               should.exist(b)
+               var c = JSON.parse(b)
+               c.should.have.property('type','FeatureCollection')
+               c.should.have.property('features')
+               c.features.should.have.length(34)
+               _.each(c.features
                               ,function(member){
                                   member.should.have.property('geometry')
                                   member.should.have.property('properties')
@@ -153,8 +153,8 @@ describe ('carb shape service', function(){
                                   member.properties.should.have.property('ab')
                               })
 
-                       return done()
-                   })
+               return done()
+           })
        })
     it('should spit out air district shapes in a bbox'
        ,function(done){
@@ -163,24 +163,24 @@ describe ('carb shape service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
-                       if(e) return done(e)
-                       r.statusCode.should.equal(200)
-                       should.exist(b)
-                       var c = JSON.parse(b)
-                       c.should.have.property('type','FeatureCollection')
-                       c.should.have.property('features')
-                       c.features.should.have.length(1)
-                       var member  =c.features[0]
-                       member.should.have.property('geometry')
-                       member.should.have.property('properties')
-                       member.properties.should.have.property('id')
+               if(e) return done(e)
+               r.statusCode.should.equal(200)
+               should.exist(b)
+               var c = JSON.parse(b)
+               c.should.have.property('type','FeatureCollection')
+               c.should.have.property('features')
+               c.features.should.have.length(1)
+               var member  =c.features[0]
+               member.should.have.property('geometry')
+               member.should.have.property('properties')
+               member.properties.should.have.property('id')
 
-                       member.properties.should.have.property('name','South Coast')
-                       member.properties.should.have.property('dis' ,'SC')
-                       member.properties.should.have.property('disn','SOUTH COAST AQMD')
+               member.properties.should.have.property('name','South Coast')
+               member.properties.should.have.property('dis' ,'SC')
+               member.properties.should.have.property('disn','SOUTH COAST AQMD')
 
-                       return done()
-                   })
+               return done()
+           })
        })
     it('should spit out all the air district shapes'
        ,function(done){
@@ -189,14 +189,14 @@ describe ('carb shape service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
-                       if(e) return done(e)
-                       r.statusCode.should.equal(200)
-                       should.exist(b)
-                       var c = JSON.parse(b)
-                       c.should.have.property('type','FeatureCollection')
-                       c.should.have.property('features')
-                       c.features.should.have.length(47)
-                       _.each(c.features
+               if(e) return done(e)
+               r.statusCode.should.equal(200)
+               should.exist(b)
+               var c = JSON.parse(b)
+               c.should.have.property('type','FeatureCollection')
+               c.should.have.property('features')
+               c.features.should.have.length(47)
+               _.each(c.features
                               ,function(member){
                                   member.should.have.property('geometry')
                                   member.should.have.property('properties')
@@ -206,8 +206,8 @@ describe ('carb shape service', function(){
                                   member.properties.should.have.property('disn')
                               })
 
-                       return done()
-                   })
+               return done()
+           })
        })
     it('should spit out all the grid4k shapes'
        ,function(done){
@@ -216,14 +216,14 @@ describe ('carb shape service', function(){
                     ,'headers':{'accept':'application/json'}
                     ,'followRedirect':true}
                    ,function(e,r,b){
-                       if(e) return done(e)
-                       r.statusCode.should.equal(200)
-                       should.exist(b)
-                       var c = JSON.parse(b)
-                       c.should.have.property('type','FeatureCollection')
-                       c.should.have.property('features')
-                       c.features.should.have.length(25083)
-                       _.each(c.features
+               if(e) return done(e)
+               r.statusCode.should.equal(200)
+               should.exist(b)
+               var c = JSON.parse(b)
+               c.should.have.property('type','FeatureCollection')
+               c.should.have.property('features')
+               c.features.should.have.length(25083)
+               _.each(c.features
                               ,function(member){
                                   member.should.have.property('geometry')
                                   member.should.have.property('properties')
@@ -235,7 +235,7 @@ describe ('carb shape service', function(){
 
                               })
 
-                       return done()
-                   })
+               return done()
+           })
        })
 })
