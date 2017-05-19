@@ -1,5 +1,7 @@
 # Express routes for Shapes PostGIS
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jmarca/spatial_routes.svg)](https://greenkeeper.io/)
+
 This library condenses the routes that I am using to load my database
 tables using my shapes_postgis library.
 
